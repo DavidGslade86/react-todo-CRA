@@ -2,6 +2,8 @@ import React from "react"
 
 export default function AddTodoForm (props) {
 
+    //takes submit even as argument
+    //sets value of input as variable and then sets state to value of input variable
     let handleAddTodo = (event) => {
         event.preventDefault();
         let todoTitle = event.target.elements.title.value;

@@ -6,6 +6,7 @@ import AddTodoForm from './AddTodoForm'
 
 function App() {
 
+  //state variable and set function to set state to value added by user input
   const [newTodo, setNewTodo] = React.useState({value:""});
 
   return (
