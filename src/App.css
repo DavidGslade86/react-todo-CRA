@@ -21,7 +21,10 @@
   margin-inline: 10px;
 }
 
-.list--items {
+.bold {
   font-weight: 600;
+}
+
+.list--items {
   margin-top: 10px;
 }
