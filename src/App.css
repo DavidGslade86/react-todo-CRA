@@ -28,3 +28,7 @@
 .list--items {
   margin-top: 10px;
 }
+
+.remove--button {
+  margin-inline: 10px;
+}

@@ -3,11 +3,10 @@ import './App.css'
 import TodoList from './TodoList'
 import AddTodoForm from './AddTodoForm'
 
-
 function App() {
 
-  //state variable and set function to set state to value added by user input
-
+  //custom handler to store sringified array of data objects in local memory
+  //and set state from parsed local memory data
   const useSemiPersistantState = () => {
     const [todoList, setTodoList] = React.useState(JSON.parse(localStorage.getItem("savedTodoList")) || []);
 
@@ -18,8 +17,13 @@ function App() {
 
   const [todoList,setTodoList] = useSemiPersistantState();
   
+  //creates array of objects with unique ID key and user generated title
   const addTodo = (newTodo) => {
     setTodoList(prevList => ([...prevList, newTodo]));
+  }
+
+  const removeTodo =(id) => {
+    setTodoList(prevList => prevList.filter(listItem => listItem.id !== id));
   }
 
   return (
@@ -28,6 +32,7 @@ function App() {
       <AddTodoForm onAddTodo={addTodo} />
       <TodoList 
         todoList = {todoList}
+        onRemoveTodo = {removeTodo}
       />
     </div>
   )

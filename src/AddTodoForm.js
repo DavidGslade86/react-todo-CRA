@@ -1,4 +1,5 @@
 import React from "react"
+import InputWithLabel from "./InputWithLabel"
 
 export default function AddTodoForm (props) {
 
@@ -22,15 +23,12 @@ export default function AddTodoForm (props) {
     return(
         <>
             <form onSubmit={handleAddTodo}>
-                <label className="side--marg bold" htmlFor="todoTitle">Title</label>
-                <input 
-                    className="side--marg" 
-                    id="todoTitle" 
-                    name="title"
-                    value = {todoTitle}
-                    onChange = {handleTitleChange}
-                >
-                </input>
+                <InputWithLabel
+                    todoTitle = {todoTitle}
+                    handleTitleChange = {handleTitleChange}
+                    label = "Title"
+                    isFocused
+                />
                 <button className="side--marg">ADD</button>
             </form>
         </>
