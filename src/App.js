@@ -5,23 +5,36 @@ import AddTodoForm from './AddTodoForm'
 
 function App() {
 
-  //custom handler to store sringified array of data objects in local memory
-  //and set state from parsed local memory data
-  const useSemiPersistantState = () => {
-    const [todoList, setTodoList] = React.useState(JSON.parse(localStorage.getItem("savedTodoList")) || []);
+  //stateful variables for todo list and loading status
+  const [todoList, setTodoList] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(true);
 
-    React.useEffect(()=>{localStorage.setItem("savedTodoList", JSON.stringify(todoList))}, [todoList]);
+  //promise based useEffect to simulate API call
+  //resolves after 2 seconds then creates data object with todolist key set to local storage "savedTodoList"
+  React.useEffect(() => {
+    new Promise(
+      (resolve, reject) => {
+        setTimeout(() => resolve({data:{"todoList": JSON.parse(localStorage.getItem("savedTodoList")) || [] }}), 
+      2000)}
+    ).then((result => {
+      setTodoList(result.data.todoList)
+      setIsLoading(false);
+    }));
+  }, [])
 
-    return [todoList, setTodoList]
-  }
-
-  const [todoList,setTodoList] = useSemiPersistantState();
+  //sets local storage "savedTodoList" to stateful variable todoList when loading is complete
+  React.useEffect(()=>{
+    if(isLoading === false){
+      localStorage.setItem("savedTodoList", JSON.stringify(todoList))
+    } 
+  }, [todoList, isLoading]);
   
   //creates array of objects with unique ID key and user generated title
   const addTodo = (newTodo) => {
     setTodoList(prevList => ([...prevList, newTodo]));
   }
 
+  //updates todo list state to array without item of given id
   const removeTodo =(id) => {
     setTodoList(prevList => prevList.filter(listItem => listItem.id !== id));
   }
@@ -30,10 +43,11 @@ function App() {
     < div className="container">
       <h1 className="title">Todo List</h1>
       <AddTodoForm onAddTodo={addTodo} />
+      {isLoading ? (<p className="side--marg bold">Loading...</p>) : 
       <TodoList 
         todoList = {todoList}
         onRemoveTodo = {removeTodo}
-      />
+      />}
     </div>
   )
 }
