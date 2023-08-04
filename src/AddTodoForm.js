@@ -16,7 +16,7 @@ export default function AddTodoForm (props) {
 
     let handleAddTodo = (event) => {
         event.preventDefault();
-        onAddTodo({id:Date.now(), title:todoTitle});
+        onAddTodo({title:todoTitle});
         setTodoTitle("");
     }
 
