@@ -9,6 +9,9 @@ function App() {
   const [todoList, setTodoList] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
 
+  //calls to Airtable API using fetch() 
+  //converts retrieved data to array of objects with "id" and "title" key values
+  //"title" is the todo list item
   const fetchData = async () => {
     
     const options = {
@@ -42,8 +45,7 @@ function App() {
 
 
 
-  //promise based useEffect to simulate API call
-  //resolves after 2 seconds then creates data object with todolist key set to local storage "savedTodoList"
+  //useEffect called on mount which updates the UI and todoList variable after successful API call
   React.useEffect(() => {
     fetchData().then((result) => {
         setTodoList(result);
@@ -51,14 +53,14 @@ function App() {
       });
   }, []);
 
-  //sets local storage "savedTodoList" to stateful variable todoList when loading is complete
+  //sets local storage "savedTodoList" to stateful variable todoList when API call is complete
   React.useEffect(()=>{
     if(isLoading === false){
       localStorage.setItem("savedTodoList", JSON.stringify(todoList))
     } 
   }, [todoList, isLoading]);
   
-  //creates array of objects with unique ID key and user generated title
+  //updates Airtable through API with new user generated todoList item
   const addTodo = async (newTodo) => {
 
     const newTodoData = {
@@ -102,7 +104,7 @@ function App() {
 
   }
 
-  //updates todo list state to array without item of given id
+  //updates todo list state to array without item of given id (not connected to API yet)
   const removeTodo =(id) => {
     setTodoList(todoList.filter(todo => todo.id !== id));
   }
