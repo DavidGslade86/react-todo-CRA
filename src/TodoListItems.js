@@ -13,9 +13,9 @@ export default function TodoListItems (props) {
         padding: 10px;
         font-weight: 600;
         background-color: rgb(34, 1, 25);
-        -webkit-box-shadow: 2px 2px 6px -3px rgba(224,224,224,0.62);
-        -moz-box-shadow: 2px 2px 6px -3px rgba(224,224,224,0.62);
-        box-shadow: 2px 2px 6px -3px rgba(224,224,224,0.62);
+        box-shadow: 2px 2px 6px 0px rgba(108,0,0,0.72);
+        -webkit-box-shadow: 2px 2px 6px 0px rgba(108,0,0,0.72);
+        -moz-box-shadow: 2px 2px 6px 0px rgba(108,0,0,0.72);
         width: 75%;
 
         @media (min-width: 800px) {
