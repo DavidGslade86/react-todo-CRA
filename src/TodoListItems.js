@@ -1,15 +1,69 @@
 import React from "react"
+import styled from 'styled-components'
+import DeleteIcon from '@mui/icons-material/ClearOutlined';
 
 export default function TodoListItems (props) {
+
+    const Li = styled.li `
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-radius: 5px;
+        margin: 12px;
+        padding: 10px;
+        font-weight: 600;
+        background-color: rgb(34, 1, 25);
+        -webkit-box-shadow: 2px 2px 6px -3px rgba(224,224,224,0.62);
+        -moz-box-shadow: 2px 2px 6px -3px rgba(224,224,224,0.62);
+        box-shadow: 2px 2px 6px -3px rgba(224,224,224,0.62);
+        width: 75%;
+
+        @media (min-width: 800px) {
+            width: 50%;
+            margin-left: 100px;
+        }
+
+        @media (min-width: 1300px) {
+            width: 35%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    `;
+
+    const LiTitle = styled.span `
+        width: 50%;
+        color:rgb(249, 212, 212);
+    `
+
+    const LiButContain = styled.span `
+        width 25%
+    `
+
+    const Button = styled.button `
+        display: flex;
+        background-color: rgb(255, 126, 126);
+        border: none;
+        border-radius: 50%; 
+        height: 2em;
+        width: 2em;
+        justify-content: center;
+        align-items: center;
+
+        &:hover {
+            background-color: rgb(255, 17, 17);
+        }
+    `
 
     const {todo, onRemoveTodo} = props;
 
     //map function to create list items from todoList array
     let listItem = todo.map(item => (
-        <li className="list--items bold" key={item.id}>
-            {item.title}
-            <button className="remove--button" type = "button" onClick ={() => onRemoveTodo(item.id)}>Remove</button>
-        </li>
+        <Li key={item.id}>
+            <LiTitle>{item.title}</LiTitle>
+            <LiButContain> 
+                <Button className="remove--button" type = "button" onClick ={() => onRemoveTodo(item.id)}><DeleteIcon fontSize='small'/></Button>
+            </LiButContain>
+        </Li>
     ))
 
     return(

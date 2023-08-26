@@ -1,12 +1,15 @@
 import React from "react"
 import './App.css'
 import TodoList from './TodoList'
-import AddTodoForm from './AddTodoForm'
+import NavBar from './NavBar'
 import {BrowserRouter, Routes, Route} from "react-router-dom"
+import AddTodoForm from "./AddTodoForm"
 
 function App() {
 
   //stateful variables for todo list and loading status
+  const [allLists, setAllLists] = React.useState([]);
+  const [currentList, setCurrentList] = React.useState("My Todo List");
   const [todoList, setTodoList] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
 
@@ -43,8 +46,6 @@ function App() {
         console.log(error.message)
       }
     }
-
-
 
   //useEffect called on mount which updates the UI and todoList variable after successful API call
   React.useEffect(() => {
@@ -109,6 +110,64 @@ function App() {
 
   }
 
+    //updates Airtable through API with new user generated Lists
+  const addList = async (newList) => {
+
+    const newListData = {
+      description:`A todo list concerning ${newList}`,
+      fields: [
+        {
+          "description": `${newList} items`,
+          "name": "Title",
+          "type": "singleLineText"
+        },
+        {
+          "name": "CompletedAt",
+          "type": "date"
+        },
+        {
+          "name": "Visited",
+          "type": "createdTime"
+        }
+      ],
+      name: {newList}
+    };
+
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`
+      },
+      body: JSON.stringify(newListData)
+    };
+
+    const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/tables`
+    
+    try{
+
+      const response = await fetch(url, options);
+
+      if(!response.ok) {
+        const message = `Error has occurred: ${response.status}`;
+        throw new Error(message)
+      }
+
+      const data = await response.json();
+
+      const addedListFromAPI = {
+        id: data.id,
+        title:data.name
+      }
+
+      setAllLists([...allLists, addedListFromAPI]);
+
+    } catch (error) {
+      console.log(error.message)
+    }
+
+  }
+
   //updates todo list state to array without item of given id (not connected to API yet)
   const removeTodo = async (id) => {
 
@@ -149,30 +208,42 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path = "/new"
-          element = {
-            <h1>New Todo List</h1>
-          }
-        />
-        <Route
-          path = "/"
-          element = {
-            <div className="container">
-              <h1 className="title">Todo List</h1>
-              <AddTodoForm onAddTodo={addTodo} />
-              {isLoading ? (<p className="side--marg bold">Loading...</p>) : 
-              <TodoList 
-                todoList = {todoList}
-                onRemoveTodo = {removeTodo}
-              />}
-            </div>
-          }
-        />
-      </Routes>
-    </BrowserRouter>
+    <div className="App">
+      <NavBar
+        onAddList={addList}
+      />
+      <BrowserRouter>
+          <Routes>
+            <Route
+              path = "/new"
+              element = {
+                <h1>New Todo List</h1>
+              }
+            />
+            <Route
+              path = "/"
+              element = {
+                <div className="container">
+                  <div className="contents">
+                    <div className="titleContainer">
+                      <h1 className="title">{currentList}</h1>
+                    </div>
+                    {isLoading ? (<p className="side--marg bold">Loading...</p>) : 
+                      <TodoList 
+                        todoList = {todoList}
+                        onRemoveTodo = {removeTodo}
+                      />
+                    }
+                    <AddTodoForm
+                      onAddTodo = {addTodo}
+                    />
+                  </div>
+                </div>
+              }
+            />
+          </Routes>
+      </BrowserRouter>
+    </div>
   )
 }
 

@@ -6,7 +6,7 @@ export default function TodoList (props) {
 
     return(
         <>
-            <ul>
+            <ul className="todo--list">
                 <TodoListItems 
                     todo = {todoList} 
                     onRemoveTodo = {onRemoveTodo}

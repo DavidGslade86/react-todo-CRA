@@ -2,20 +2,36 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.container {
-  height: 100vh;
-  background: rgb(34,65,128);
-  background: linear-gradient(180deg, rgba(187,255,250,1)  0%, rgb(255, 255, 255) 100%);
+body {
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+.App {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+}
+
+.container {
+  flex: 1;
+  background: rgb(163, 163, 163);
+  background: linear-gradient(180deg, rgb(249, 212, 212)  0%, rgb(235, 216, 177) 100%);
 }
 
 .title {
   font-family: Arial, Helvetica, sans-serif;
-  margin-top: 5vh;
+  display: inline-block;
+  width: auto;
+  margin: 12px;
+  font-size: 1.2em;
   font-weight: 800;
+  color: rgb(34, 1, 25);
 }
+
 
 .side--marg {
   margin-inline: 10px;
@@ -25,10 +41,28 @@
   font-weight: 600;
 }
 
-.list--items {
-  margin-top: 10px;
+.todo--list {
+  text-align: start;
+  color: aliceblue;
+  margin: 0;
 }
 
 .remove--button {
   margin-inline: 10px;
+}
+
+@media (min-width: 800px) {
+  .title{
+    margin-left: 100px;
+  }
+}
+
+@media (min-width: 1300px) {
+  .title{
+    margin: 0;
+  }
+
+  .titleContainer{
+    text-align: center;
+  }
 }

@@ -1,7 +1,51 @@
 import React from "react"
 import InputWithLabel from "./InputWithLabel"
+import styled from 'styled-components'
+import AddIcon from '@mui/icons-material/AddOutlined';
 
 export default function AddTodoForm (props) {
+
+    const Form = styled.form `
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-radius: 5px;
+        margin: 12px;
+        padding: 10px;
+        font-weight: 600;
+        background-color: rgb(11, 0, 23);
+        -webkit-box-shadow: 2px 2px 6px -3px rgba(224,224,224,0.62);
+        -moz-box-shadow: 2px 2px 6px -3px rgba(224,224,224,0.62);
+        box-shadow: 2px 2px 6px -3px rgba(224,224,224,0.62);
+        width: 75%;
+
+        @media (min-width: 800px) {
+            width: 50%;
+            margin-left: 100px;
+        }
+
+        @media (min-width: 1300px) {
+            width: 35%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    `;
+
+    const Button = styled.button `
+        margin-inline: 10px;
+        display: flex;
+        background-color: rgb(194, 255, 132);
+        border: none;
+        border-radius: 50%; 
+        height: 2em;
+        width: 2em;
+        justify-content: center;
+        align-items: center;
+
+        &:hover {
+            background-color: rgb(0, 223, 15);
+        }
+    `;
 
     const [todoTitle, setTodoTitle] = React.useState("");
     
@@ -22,15 +66,14 @@ export default function AddTodoForm (props) {
 
     return(
         <>
-            <form onSubmit={handleAddTodo}>
+            <Form onSubmit={handleAddTodo}>
                 <InputWithLabel
                     todoTitle = {todoTitle}
                     handleTitleChange = {handleTitleChange}
-                    label = "Title"
                     isFocused
                 />
-                <button className="side--marg">ADD</button>
-            </form>
+                <Button><AddIcon/></Button>
+            </Form>
         </>
     )
 }
