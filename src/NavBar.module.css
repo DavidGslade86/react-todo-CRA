@@ -9,7 +9,7 @@
 
 .sideNavClosed {
     composes: sideNav;
-    transition: width 0.3s ease-in-out;
+    transition: width 0.2s ease-in-out;
     width: 60px;
 }
 
@@ -34,6 +34,7 @@
 .sideLists:hover {
     background-color: rgba(133, 133, 133, 0.796);
     color: rgb(255, 127, 182);
+    transition: color .3s ease-in-out, background-color .3s ease-in-out;
 }
 
 .navItem {

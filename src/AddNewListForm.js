@@ -27,6 +27,7 @@ export default function AddNewListForm (props) {
 
         &:hover {
             background-color: rgb(0, 223, 15);
+            transition: background-color .3s ease-in-out;
         }
     `;
 

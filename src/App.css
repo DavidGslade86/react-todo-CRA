@@ -60,7 +60,7 @@ ul {
 
 @media (min-width: 1300px) {
   .title{
-    margin: 0;
+    margin: 16px;
   }
 
   .titleContainer{

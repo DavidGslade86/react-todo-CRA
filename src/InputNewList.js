@@ -28,14 +28,15 @@ export default function InputNewList ({ListTitle, handleTitleChange, isFocused})
 
     return(
         <div className={styles.column}>
-            <Input 
+
+            <Input
                 id="listTitle" 
                 name="title"
                 value = {ListTitle}
                 onChange = {handleTitleChange}
                 ref={inputRef}
-            >
-            </Input>
+            />
+            <label htmlFor="listTitle"> </label>
         </div>
     )
 }

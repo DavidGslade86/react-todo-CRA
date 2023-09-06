@@ -31,6 +31,7 @@ export default function InputWithLabel ({todoTitle, handleTitleChange, isFocused
             <Input  
                 id="todoTitle" 
                 name="title"
+                defaultValue='New Todo'
                 value = {todoTitle}
                 onChange = {handleTitleChange}
                 ref={inputRef}

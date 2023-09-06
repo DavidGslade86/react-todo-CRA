@@ -17,6 +17,15 @@ export default function TodoListItems (props) {
         -webkit-box-shadow: 2px 2px 6px 0px rgba(108,0,0,0.72);
         -moz-box-shadow: 2px 2px 6px 0px rgba(108,0,0,0.72);
         width: 75%;
+        color:rgb(249, 212, 212);
+        transition: box-shadow .3s ease-out,-webkit-box-shadow .3s ease-out, -moz-box-shadow .3s ease-out;
+
+        &:hover {
+            box-shadow: 2px 2px 6px 0px rgba(255, 98, 0, 0.622);
+            -webkit-box-shadow: 2px 2px 6px 0px rgba(255, 98, 0, 0.622);
+            -moz-box-shadow: 2px 2px 6px 0px rgba(255, 98, 0, 0.622);
+            transition: box-shadow .3s ease-out,-webkit-box-shadow .3s ease-out, -moz-box-shadow .3s ease-out;
+        }
 
         @media (min-width: 800px) {
             width: 50%;
@@ -32,7 +41,6 @@ export default function TodoListItems (props) {
 
     const LiTitle = styled.span `
         width: 50%;
-        color:rgb(249, 212, 212);
     `
 
     const LiButContain = styled.span `
@@ -51,6 +59,7 @@ export default function TodoListItems (props) {
 
         &:hover {
             background-color: rgb(255, 17, 17);
+            transition: background-color .3s ease-in-out;
         }
     `
 

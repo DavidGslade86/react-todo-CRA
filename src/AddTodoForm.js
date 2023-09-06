@@ -43,6 +43,7 @@ export default function AddTodoForm (props) {
         align-items: center;
 
         &:hover {
+            transition: background-color .3s ease-in-out;
             background-color: rgb(0, 223, 15);
         }
     `;
