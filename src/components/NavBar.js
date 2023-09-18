@@ -3,11 +3,16 @@ import AddNewListForm from './AddNewListForm'
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import styles from './NavBar.module.css';
+import PropType from 'prop-types';
 
 
 export default function SideNavBar (props) {
 
     const {onAddTodo} = props;
+
+    SideNavBar.propTypes = {
+        onAddList: PropType.func.isRequired,
+    }
 
     const tasks = [
         {

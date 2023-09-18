@@ -1,9 +1,9 @@
 import React from "react"
 import './App.css'
-import TodoList from './TodoList'
-import NavBar from './NavBar'
+import TodoList from './components/TodoList'
+import NavBar from './components/NavBar'
 import {BrowserRouter, Routes, Route} from "react-router-dom"
-import AddTodoForm from "./AddTodoForm"
+import AddTodoForm from "./components/AddTodoForm"
 
 function App() {
 
