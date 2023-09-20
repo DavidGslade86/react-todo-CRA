@@ -1,7 +1,7 @@
 import React from "react"
 import InputNewList from "./InputNewList"
 import styled from 'styled-components'
-import styles from './NavBar.module.css';
+import styles from './SideNavBar.module.css';
 import AddIcon from '@mui/icons-material/AddOutlined';
 import PropType from 'prop-types';
 
@@ -34,6 +34,7 @@ export default function AddNewListForm (props) {
 
 
     const [listTitle, setListTitle] = React.useState("");
+    console.log(listTitle);
     
     const {onAddList} = props;
 
@@ -45,12 +46,12 @@ export default function AddNewListForm (props) {
     //sets value of input as variable and then sets state to value of input variable
     const handleTitleChange = (event) => {
         let newListTitle = event.target.value;
-        setListTitle(newListTitle);
+        setListTitle(newListTitle)
     } 
 
     let handleAddList = (event) => {
         event.preventDefault();
-        onAddList({title:listTitle});
+        onAddList(listTitle);
         setListTitle("");
     }
 
@@ -62,7 +63,7 @@ export default function AddNewListForm (props) {
                     handleTitleChange = {handleTitleChange}
                     isFocused
                 />
-                <Button type="button"><AddIcon/></Button>
+                <Button type="submit"><AddIcon/></Button>
             </Form>
         </div>
     )

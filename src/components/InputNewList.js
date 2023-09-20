@@ -1,5 +1,5 @@
 import React from "react"
-import styles from './NavBar.module.css';
+import styles from './SideNavBar.module.css';
 import styled from 'styled-components' 
 import PropType from 'prop-types';
 
@@ -35,7 +35,6 @@ export default function InputNewList ({ListTitle, handleTitleChange, isFocused})
 
     return(
         <div className={styles.column}>
-
             <Input
                 id="listTitle" 
                 name="title"
@@ -43,7 +42,6 @@ export default function InputNewList ({ListTitle, handleTitleChange, isFocused})
                 onChange = {handleTitleChange}
                 ref={inputRef}
             />
-            <label htmlFor="listTitle"> </label>
         </div>
     )
 }

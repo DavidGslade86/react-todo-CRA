@@ -78,7 +78,7 @@ export default function AddTodoForm (props) {
                     handleTitleChange = {handleTitleChange}
                     isFocused
                 />
-                <Button><AddIcon/></Button>
+                <Button type="submit"><AddIcon/></Button>
             </Form>
         </>
     )

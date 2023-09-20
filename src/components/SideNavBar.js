@@ -2,33 +2,19 @@ import React, { useEffect } from "react";
 import AddNewListForm from './AddNewListForm'
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
-import styles from './NavBar.module.css';
+import styles from './SideNavBar.module.css';
 import PropType from 'prop-types';
+import { Link } from "react-router-dom";
 
+
+SideNavBar.propTypes = {
+    onAddList: PropType.func.isRequired,
+    lists: PropType.array.isRequired
+}
 
 export default function SideNavBar (props) {
 
-    const {onAddTodo} = props;
-
-    SideNavBar.propTypes = {
-        onAddList: PropType.func.isRequired,
-    }
-
-    const tasks = [
-        {
-            id:1,
-            title: "My Todo List"
-        },
-        {
-            id:2,
-            title: "Home"
-        },
-        {
-            id:3,
-            title: "Misc"
-        }
-
-    ]
+    const {onAddList, lists, setActiveList, isLoading} = props;
 
     const [open, setOpen] = React.useState(true);
     const [prevWindowWidth, setPrevWindowWidth] = React.useState(window.innerWidth);
@@ -65,12 +51,16 @@ export default function SideNavBar (props) {
                     {open ? <KeyboardDoubleArrowLeftIcon/> : <KeyboardDoubleArrowRightIcon/>}
                 </button>
                 <div className={open ? styles.navComps : styles.navCompsClosed}>
-                    {tasks.map(item => {
-                        return(<div key={item.id} className={styles.sideLists}>
-                            <span className={styles.navItem}>{item.title}</span>
-                        </div>)
-                    })}
-                    <AddNewListForm onAddTodo = {onAddTodo} />
+                {isLoading ? (<p className="side--marg bold">Loading...</p>) :
+                    <div>
+                        {lists.map(item => {
+                            return(<Link to={`/list/${item.id}`} key={item.id} className={styles.sideLists} onClick={()=>setActiveList(item.id)}>
+                                <span className={styles.navItem}>{item.name}</span>
+                            </Link>)
+                        })}
+                    </div>
+                }
+                    <AddNewListForm onAddList = {onAddList} />
                 </div>
             </div>
         </>
