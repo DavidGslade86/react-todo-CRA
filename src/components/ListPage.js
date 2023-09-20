@@ -46,11 +46,18 @@ export default function ListPage(props) {
   
     React.useEffect(() => {
 
+      const cachedItem = localStorage.getItem(`${listId}TodoList`);
+
+      if(cachedItem){
+        setTodoList(JSON.parse(cachedItem));
+        setLoading(false);
+        return;
+      }
+
       const fetchListData = async function () {
           try {
               const todos = await fetchActiveListData(listId);
               setTodoList(todos);
-              console.log(todos);
               setLoading(false);
           } catch (error) {
               console.error(error.message);
@@ -60,7 +67,7 @@ export default function ListPage(props) {
   
       fetchListData();
   
-  }, [listId]); 
+  }, [activeList, listId]); 
 
     React.useEffect(()=>{
         if(isLoading === false && localStorage.getItem(`${activeList.id}TodoList`) === null){
@@ -152,19 +159,20 @@ export default function ListPage(props) {
       }
     }
 
-    console.log(activeList);
-
     return(
             <div className="container">
               <div className="contents">
-                <div className="titleContainer">
-                  <h1 className="title">{activeList.name}</h1>
-                </div>
-                {isLoading ? (<p className="side--marg bold">Loading...</p>) : 
-                  <TodoList 
-                    todoList = {todoList}
-                    onRemoveTodo = {removeTodo}
-                  />
+                {isLoading ? (<p className="title bold">Loading...</p>) : 
+                  <>
+                    <div className="titleContainer">
+                      <h1 className="title">{activeList.name}</h1>
+                    </div>
+                    <TodoList 
+                      todoList = {todoList}
+                      setList = {setTodoList}
+                      onRemoveTodo = {removeTodo}
+                    />
+                  </>
                 }
                 <AddTodoForm
                   onAddTodo = {addTodo}

@@ -14,7 +14,7 @@ SideNavBar.propTypes = {
 
 export default function SideNavBar (props) {
 
-    const {onAddList, lists, setActiveList, isLoading} = props;
+    const {onAddList, lists, setActiveList, isLoading, activeList} = props;
 
     const [open, setOpen] = React.useState(true);
     const [prevWindowWidth, setPrevWindowWidth] = React.useState(window.innerWidth);
@@ -54,7 +54,7 @@ export default function SideNavBar (props) {
                 {isLoading ? (<p className="side--marg bold">Loading...</p>) :
                     <div>
                         {lists.map(item => {
-                            return(<Link to={`/list/${item.id}`} key={item.id} className={styles.sideLists} onClick={()=>setActiveList(item.id)}>
+                            return(<Link to={`/list/${item.id}`} key={item.id} className={styles.sideLists} onClick={()=>setActiveList(item.id, activeList)}>
                                 <span className={styles.navItem}>{item.name}</span>
                             </Link>)
                         })}

@@ -34,7 +34,6 @@ export default function AddNewListForm (props) {
 
 
     const [listTitle, setListTitle] = React.useState("");
-    console.log(listTitle);
     
     const {onAddList} = props;
 

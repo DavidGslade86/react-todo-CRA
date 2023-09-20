@@ -2,13 +2,33 @@ import React from "react"
 import './App.css'
 import SideNavBar from './components/SideNavBar'
 import ListPage from './components/ListPage'
-import {BrowserRouter, Routes, Route, useNavigate} from "react-router-dom"
+import {BrowserRouter, Routes, Route, useNavigate } from "react-router-dom"
+
+function Redirector({ currentList }) {
+  const navigate = useNavigate();
+
+  React.useEffect(() => {
+    if (currentList && currentList.id) {
+      navigate(`/list/${currentList.id}`);
+    }
+  }, [currentList, navigate]);
+
+  return (
+    <div className="container">
+      <div className="contents">
+        <div className="titleContainer">
+          <h1 className="title">YOUR TODOS ARE COMING...</h1>
+        </div>
+      </div>
+    </div>
+  ); // render loading page, it's just for side effect
+}
 
 function App() {
 
   //stateful variables for todo list and loading status
   const [allLists, setAllLists] = React.useState([]);
-  const [currentList, setCurrentList] = React.useState([]);
+  const [currentList, setCurrentList] = React.useState({});
   const [isLoading, setIsLoading] = React.useState(true);
   const [tablesLoading, setTablesLoading] = React.useState(true);
 
@@ -16,9 +36,13 @@ function App() {
   //converts retrieved data to array of list objects with "id" and "name" key values
   //"id" is used for fetching individual lists 
 
-  const handleSetCurrentList = (id) => {
+  const handleSetCurrentList = (id, activeList) => {
     const currentList = allLists.find(list => list.id === id);
+    if(currentList.id === activeList.id) {
+      return;
+    }
     setCurrentList(currentList);
+    setIsLoading(true);
   }
 
   const fetchTableData = async () => {
@@ -68,6 +92,7 @@ function App() {
     }
 
     fetchData();
+
 }, []);
 
     //updates Airtable through API with new user generated Lists
@@ -152,15 +177,12 @@ function App() {
           lists={allLists}
           isLoading ={tablesLoading}
           setActiveList={handleSetCurrentList}
+          activeList = {currentList}
         />
           <Routes>
-            <Route
-              path="/lists/new"
-              element = {
-                <h1>New Todo List</h1>
-              }
-            />
-            <Route
+            <Route path="/lists/new" element={<h1>New Todo List</h1>} />
+            <Route path="/" element={<Redirector currentList={currentList} />}/>
+            <Route 
               path="/list/:listId" 
               element={<ListPage
                 activeList={currentList}

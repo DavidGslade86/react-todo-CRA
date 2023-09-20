@@ -8,7 +8,7 @@ display: flex;
 align-items: center;
 justify-content: space-between;
 border-radius: 5px;
-margin: 12px;
+margin: 0 12px 12px 12px;
 padding: 10px;
 font-weight: 600;
 background-color: rgb(34, 1, 25);
@@ -62,14 +62,14 @@ align-items: center;
 }
 `
 
+TodoListItems.propTypes = {
+    todo: PropType.array.isRequired,
+    onRemoveTodo: PropType.func.isRequired,
+}
+
 export default function TodoListItems (props) {
 
     const {todo, onRemoveTodo} = props;
-
-    TodoListItems.propTypes = {
-        todo: PropType.array.isRequired,
-        onRemoveTodo: PropType.func.isRequired,
-    }
 
     //map function to create list items from todoList array
     let listItem = todo.map(item => (
