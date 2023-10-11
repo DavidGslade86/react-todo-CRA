@@ -13,17 +13,19 @@ padding: .4em;
 color: #453b3f;
 font-family: Arial, Helvetica, sans-serif;
 font-weight: 600;
-width: 50%;
+width: 80%;
 max-width: 200px;
 `;
 
-export default function InputWithLabel ({todoTitle, handleTitleChange, isFocused}) {
-    
-    InputWithLabel.propTypes = {
-        ListTitle: PropType.string.isRequired,
-        handleTitleChange: PropType.func.isRequired,
-        isFocused: PropType.bool
-    }
+InputWithLabel.propTypes = {
+    todoTitle: PropType.string.isRequired,
+    handleTitleChange: PropType.func.isRequired,
+    handleKeyPress: PropType.func,
+    handleBlur: PropType.func,
+    isFocused: PropType.bool
+}
+
+export default function InputWithLabel ({todoTitle, handleTitleChange, isFocused, handleUpdate}) {
 
     const inputRef = React.useRef();
 
@@ -38,9 +40,16 @@ export default function InputWithLabel ({todoTitle, handleTitleChange, isFocused
             <Input  
                 id="todoTitle" 
                 name="title"
-                defaultValue='New Todo'
-                value = {todoTitle}
-                onChange = {handleTitleChange}
+                className="editable-title"
+                value={todoTitle}
+                onChange={handleTitleChange}
+                onBlur={handleUpdate ? () => handleUpdate(todoTitle) : null}
+                onKeyDown={handleUpdate ? (event) => {
+                    if (event.key === 'Enter') {
+                        event.preventDefault();
+                        handleUpdate(todoTitle);
+                    }
+                } : null}
                 ref={inputRef}
             >
             </Input>

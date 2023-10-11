@@ -17,13 +17,13 @@ font-family: Arial, Helvetica, sans-serif;
 font-weight: 600;
 `;
 
-export default function InputNewList ({ListTitle, handleTitleChange, isFocused}) {
+InputNewList.propTypes = {
+    ListTitle: PropType.string.isRequired,
+    handleTitleChange: PropType.func.isRequired,
+    isFocused: PropType.bool
+}
 
-    InputNewList.propTypes = {
-        ListTitle: PropType.string.isRequired,
-        handleTitleChange: PropType.func.isRequired,
-        isFocused: PropType.bool
-    }
+export default function InputNewList ({ListTitle, handleTitleChange, isFocused}) {
 
     const inputRef = React.useRef();
 

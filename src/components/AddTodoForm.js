@@ -5,6 +5,7 @@ import AddIcon from '@mui/icons-material/AddOutlined';
 import PropType from 'prop-types';
 
 const Form = styled.form `
+box-sizing: border-box;
 display: flex;
 align-items: center;
 justify-content: space-between;
@@ -17,14 +18,15 @@ box-shadow: 2px 2px 6px 0px rgba(108,0,0,0.72);
 -webkit-box-shadow: 2px 2px 6px 0px rgba(108,0,0,0.72);
 -moz-box-shadow: 2px 2px 6px 0px rgba(108,0,0,0.72);
 width: 75%;
+min-width:620px;
 
-@media (min-width: 800px) {
-    width: 50%;
+@media (min-width: 940px) {
+    width: 75%;
     margin-left: 100px;
 }
 
 @media (min-width: 1300px) {
-    width: 35%;
+    width: 60%;
     margin-left: auto;
     margin-right: auto;
 }
@@ -46,6 +48,9 @@ align-items: center;
     background-color: rgb(0, 223, 15);
 }
 `;
+    AddTodoForm.propTypes = {
+        onAddTodo: PropType.func.isRequired,
+    }
 
 export default function AddTodoForm (props) {
 
@@ -53,10 +58,6 @@ export default function AddTodoForm (props) {
     
     const {onAddTodo} = props;
 
-    AddTodoForm.propTypes = {
-        onAddList: PropType.func.isRequired,
-    }
-    
     //takes submit event as argument
     //sets value of input as variable and then sets state to value of input variable
     const handleTitleChange = (event) => {

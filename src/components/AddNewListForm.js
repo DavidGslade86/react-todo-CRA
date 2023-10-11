@@ -32,7 +32,6 @@ align-items: center;
 
 export default function AddNewListForm (props) {
 
-
     const [listTitle, setListTitle] = React.useState("");
     
     const {onAddList} = props;
