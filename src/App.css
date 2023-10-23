@@ -25,12 +25,18 @@ ul {
 .title {
   font-family: 'Poppins', sans-serif;
   text-shadow: 1px 1px 2px rgba(108,0,0,0.72);
-  display: inline-block;
   width: auto;
   margin: 12px;
   font-size: 1.5em;
   font-weight: 700;
   color: rgb(34, 1, 25);
+}
+
+.welcomeTitleContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 
@@ -52,7 +58,22 @@ ul {
   margin-inline: 10px;
 }
 
-@media (min-width: 800px) {
+.date--picker--button {
+  font-weight: 600;
+  font-size: 1em;
+  background-color: rgb(34, 1, 25);
+  font-family: Arial, Helvetica, sans-serif;
+  color:rgb(249, 212, 212);
+  text-align: center;
+  border: none;
+}
+
+.date--picker--button.checked{
+  background-color:rgb(188, 178, 186);;
+  color: rgb(105, 94, 103);
+}
+
+@media (min-width: 940px) {
   .title{
     margin-left: 100px;
   }

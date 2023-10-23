@@ -1,6 +1,7 @@
 
 .sideNav {
     width: 250px;
+    min-width: 200px;
     transition: width 0.3s ease-in-out;
     height: 100vh;
     padding-top: 28px;
@@ -10,6 +11,7 @@
 .sideNavClosed {
     composes: sideNav;
     transition: width 0.2s ease-in-out;
+    min-width: 60px;
     width: 60px;
 }
 
@@ -40,6 +42,7 @@
 .navItem {
     padding-left:16px;
     font-weight: 600;
+    text-decoration: none;
 }
 
 .navComps{
